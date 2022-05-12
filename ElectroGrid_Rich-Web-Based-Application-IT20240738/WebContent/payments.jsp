@@ -48,8 +48,9 @@
 		 <input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary">
 		 
 		 <input type="hidden" id="hidPaymentNoSave" name="hidPaymentNoSave" value="">
+		 
 		 &nbsp;&nbsp;&nbsp;&nbsp;
-		 <a href="/IT20240738_ElectroGrid_Frontend/search.jsp" class="btn btn-success" >Search</a>
+		 <a href="/ElectroGrid_Rich-Web-Based-Application-IT20240738/search.jsp" class="btn btn-success" >Search</a>
 		 
 	</form>
 	<br><br>
