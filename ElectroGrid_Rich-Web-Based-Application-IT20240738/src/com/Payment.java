@@ -322,76 +322,76 @@ public class Payment {
 		
 	//get payment detail using paymentNo
 		
-//		public String PaymentDetails(String paymentNo1)
-//	    {
-//		   String output = "";
-//		   
-//		   try
-//		   {
-//			   Connection con = connect(); 
-//				 if (con == null) 
-//				 { 
-//					 return "Error while connecting to the database for reading."; 
-//				 } 
-//			 
-//		     // Prepare the html table to be displayed
-//		     output = "<table border='1'><tr><th>Customer ID</th><th>Customer Name</th>" +
-//					   "<th>Payment Type</th>" +
-//					   "<th>Card No</th>" +
-//					   "<th>Payment Amount</th>" +
-//					   "<th>Payment Date</th>" +
-//					   "<th>Bill No</th>" +
-//					   "<th>Update</th><th>Remove</th></tr>";
-//		     
-//
-//		     String query = "select *  from payment where paymentNo =' " + paymentNo1 + "'" ;
-//			 Statement stmt = con.createStatement();
-//			 ResultSet rs = stmt.executeQuery(query);
-//			 
-//			 
-//			 // iterate through the rows in the result set
-//			 while (rs.next())
-//			 {
-//				 String paymentNo = Integer.toString(rs.getInt("paymentNo"));
-//				 String customerID = rs.getString("customerID");
-//				 String customerName = rs.getString("customerName");
-//				 String paymentType = rs.getString("paymentType");
-//				 String cardNo = rs.getString("cardNo");
-//				 String paymentAmount = Double.toString(rs.getDouble("paymentAmount"));
-//				 String paymentDate = rs.getString("paymentDate");
-//				 String billNo = rs.getString("billNo");
-//				 
-//				 // Add into the html table
-//				 output += "<tr><td>" + customerID + "</td>";
-//				 output += "<td>" + customerName + "</td>";
-//				 output += "<td>" + paymentType + "</td>";
-//				 output += "<td>" + cardNo + "</td>";
-//				 output += "<td>" + paymentAmount + "</td>";
-//				 output += "<td>" + paymentDate + "</td>";
-//				 output += "<td>" + billNo + "</td>";
-//				 
+		public String PaymentDetails(String paymentNo1)
+	    {
+		   String output = "";
+		   
+		   try
+		   {
+			   Connection con = connect(); 
+				 if (con == null) 
+				 { 
+					 return "Error while connecting to the database for reading."; 
+				 } 
+			 
+		     // Prepare the html table to be displayed
+		     output = "<table border='1'><tr><th>Customer ID</th><th>Customer Name</th>" +
+					   "<th>Payment Type</th>" +
+					   "<th>Card No</th>" +
+					   "<th>Payment Amount</th>" +
+					   "<th>Payment Date</th>" +
+					   "<th>Bill No</th>" +
+					   "</tr>";
+		     
+
+		     String query = "select *  from payment where paymentNo =' " + paymentNo1 + "'" ;
+			 Statement stmt = con.createStatement();
+			 ResultSet rs = stmt.executeQuery(query);
+			 
+			 
+			 // iterate through the rows in the result set
+			 while (rs.next())
+			 {
+				 String paymentNo = Integer.toString(rs.getInt("paymentNo"));
+				 String customerID = rs.getString("customerID");
+				 String customerName = rs.getString("customerName");
+				 String paymentType = rs.getString("paymentType");
+				 String cardNo = rs.getString("cardNo");
+				 String paymentAmount = Double.toString(rs.getDouble("paymentAmount"));
+				 String paymentDate = rs.getString("paymentDate");
+				 String billNo = rs.getString("billNo");
+				 
+				 // Add into the html table
+				 output += "<tr><td>" + customerID + "</td>";
+				 output += "<td>" + customerName + "</td>";
+				 output += "<td>" + paymentType + "</td>";
+				 output += "<td>" + cardNo + "</td>";
+				 output += "<td>" + paymentAmount + "</td>";
+				 output += "<td>" + paymentDate + "</td>";
+				 output += "<td>" + billNo + "</td>";
+				 
 //				 // buttons
 //				 output += "<td><input name='btnUpdate' type='button' value='Update'class='btn btn-secondary'></td>"
 //							 + "<td><form method='post' action='search.jsp'>"
 //							 + "<input name='btnRemove' type='submit' value='Remove'class='btn btn-danger'>"
 //							 + "<input name='paymentNo' type='hidden' value='" + paymentNo
 //							 + "'>" + "</form></td></tr>";
-//			 }
-//			 
-//			 con.close();
-//			 
-//			 // Complete the html table
-//			 output += "</table>";
-//		   }
-//		   catch (Exception e)
-//		   {
-//			 output = "Error while reading the payment details.";
-//			 System.err.println(e.getMessage());
-//		   }
-//		   
-//		   return output;
-//	    }
-//		
+			 }
+			 
+			 con.close();
+			 
+			 // Complete the html table
+			 output += "</table>";
+		   }
+		   catch (Exception e)
+		   {
+			 output = "Error while reading the payment details.";
+			 System.err.println(e.getMessage());
+		   }
+		   
+		   return output;
+	    }
+		
 //
 //		//Get payment history
 //		public String PaymentHistory(String customerId)

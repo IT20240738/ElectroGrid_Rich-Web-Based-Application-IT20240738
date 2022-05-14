@@ -32,30 +32,11 @@ public class PaymentsAPI extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
 	}
 	
-	
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Payment paymentObj = new Payment();
-		String output = paymentObj.insertPaymentDetails(request.getParameter("customerID"), 
-				request.getParameter("customerName"), 
-				request.getParameter("paymentType"), 
-				request.getParameter("cardNo"),
-				request.getParameter("paymentAmount"),
-				request.getParameter("paymentDate"),
-				request.getParameter("billNo")); 
-				response.getWriter().write(output); 
-	}
-	
-	
-	
-
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
+	//Convert request parameters to Map
 	private static Map getParasMap(HttpServletRequest request) 
 	{ 
 		Map<String, String> map = new HashMap<String, String>(); 
@@ -73,11 +54,28 @@ public class PaymentsAPI extends HttpServlet {
 		 map.put(p[0], p[1]); 
 	 } 
 	 } 
-	catch (Exception e) 
+	   catch (Exception e) 
 	 { 
 	 } 
-	return map; 
+	   return map; 
 	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		Payment paymentObj = new Payment();
+		String output = paymentObj.insertPaymentDetails(request.getParameter("customerID"), 
+				request.getParameter("customerName"), 
+				request.getParameter("paymentType"), 
+				request.getParameter("cardNo"),
+				request.getParameter("paymentAmount"),
+				request.getParameter("paymentDate"),
+				request.getParameter("billNo")); 
+				response.getWriter().write(output); 
+	}
+	
+	
+
 
 	
 	

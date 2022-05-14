@@ -5,42 +5,42 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Search Payment Details</title>
+<title>Payment Management</title>
 <link rel="stylesheet" href="Views/bootstrap.min.css">
 <script src="Components/jquery-3.2.1.min.js"></script>
-
+<script src="Components/payments.js"></script>
 </head>
-<body>
+<body> 
 
-<div class="container"><div class="row"><div class="col-12"> 
-<br>
-<h3> Search Payment Details </h3>
+<div class="container">
 
-	<form action="SearchAPI" method="get">
-	
-	
-	
-		 <br>Payment Number:<br><br>
-		<input id="paymentNo" name="paymentNo" type="text" class="form-control form-control-sm col-4" >
-  
-		<br><br>
-		<input type="submit" value="Search" class="btn btn-success" >
-		
-		
 
+
+<h1>Payment Search </h1>
+
+	<form id="formPayment" name="formPayment">
+		 <br> Payment No: 
+		 <input id="paymentNo" name="paymentNo" type="text" class="form-control form-control-md col-6">
+		 <br>
+	
+		 <input id="btnView" name="btnView" type="submit" value="View" class="btn btn-primary">
 	</form>
 	
+	<br>
+			<div id="alertSuccess" class="alert alert-success"></div>
+			<div id="alertError" class="alert alert-danger"></div>
+
+		<br>
+		
+			<div id="divPaymnetsGrid">
 	
-			
+			 <%
+				 Payment paymentObj = new Payment();
+			     String paymentNo = request.getParameter("paymentNo");
+				 out.print(paymentObj.PaymentDetails(paymentNo)); 
+			 %>
+			</div>
 			<br><br>
-			
-			
-	</div>
-	</div>
-	</div>
-
-
-
-
+</div> </div> </div> 
 </body>
 </html>

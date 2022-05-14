@@ -20,6 +20,7 @@ $(document).ready(function()
  $("#alertSuccess").hide(); 
  $("#alertError").text(""); 
  $("#alertError").hide(); 
+ 
 // Form validation-------------------
 var status = validateformPayment(); 
 if (status != true) 
@@ -179,27 +180,67 @@ $(document).on("click", ".btnRemove", function(event)
 
 function onItemDeleteComplete(response, status) 
 { 
-if (status == "success") 
- { 
- var resultSet = JSON.parse(response); 
- if (resultSet.status.trim() == "success") 
- { 
- $("#alertSuccess").text("Successfully deleted."); 
- $("#alertSuccess").show(); 
- $("#divPaymnetsGrid").html(resultSet.data); 
- } else if (resultSet.status.trim() == "error") 
- { 
- $("#alertError").text(resultSet.data); 
- $("#alertError").show(); 
- } 
- } else if (status == "error") 
- { 
- $("#alertError").text("Error while deleting."); 
- $("#alertError").show(); 
- } else
- { 
- $("#alertError").text("Unknown error while deleting.."); 
- $("#alertError").show(); 
- } 
+		if (status == "success") 
+		 { 
+		 var resultSet = JSON.parse(response); 
+		 if (resultSet.status.trim() == "success") 
+		 { 
+		 $("#alertSuccess").text("Successfully deleted."); 
+		 $("#alertSuccess").show(); 
+		 $("#divPaymnetsGrid").html(resultSet.data); 
+		 } else if (resultSet.status.trim() == "error") 
+		 { 
+		 $("#alertError").text(resultSet.data); 
+		 $("#alertError").show(); 
+		 } 
+		 } else if (status == "error") 
+		 { 
+		 $("#alertError").text("Error while deleting."); 
+		 $("#alertError").show(); 
+		 } else
+		 { 
+		 $("#alertError").text("Unknown error while deleting.."); 
+		 $("#alertError").show(); 
+	     } 
  }
+ 
+ $(document).on("click", "#btnView", function(event) 
+{ 
+const value = $("#paymentNo").val();
+		console.log(value);
+ $.ajax( 
+ { 
+ url : "PaymentsAPI", 
+ type : "GET", 
+ data : "paymentNo=" + $(this).data("paymentno"),
+ dataType : "text", 
+ complete : function(response, status) 
+ { 
+ onItemViewComplete(response.responseText, status); 
+ } 
+ }); 
+});
 
+
+function onItemViewComplete(response, status) 
+{ 
+		if (status == "success") 
+		 { 
+		 var resultSet = JSON.parse(response); 
+		 if (resultSet.status.trim() == "success") 
+		 { 
+		 $("#alertSuccess").text("Successfully View."); 
+		 $("#alertSuccess").show(); 
+		 $("#divPaymnetsGrid").html(resultSet.data); 
+		 } else if (resultSet.status.trim() == "error") 
+		 { 
+		 $("#alertError").text(resultSet.data); 
+		 $("#alertError").show(); 
+		 } 
+		 } else if (status == "error") 
+		 { 
+		 $("#alertError").text("Error while view."); 
+		 $("#alertError").show(); 
+		 }
+ }
+ 
