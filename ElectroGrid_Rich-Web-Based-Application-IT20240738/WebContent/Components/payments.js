@@ -83,13 +83,13 @@ if (status == "success")
 $(document).on("click", ".btnUpdate", function(event) 
 { 
 $("#hidPaymentNoSave").val($(this).data("paymentno")); 
- $("#customerID").val($(this).closest("tr").find('td:eq(0)').text()); 
- $("#customerName").val($(this).closest("tr").find('td:eq(1)').text()); 
- $("#paymentType").val($(this).closest("tr").find('td:eq(2)').text()); 
- $("#cardNo").val($(this).closest("tr").find('td:eq(3)').text()); 
- $("#paymentAmount").val($(this).closest("tr").find('td:eq(4)').text()); 
- $("#paymentDate").val($(this).closest("tr").find('td:eq(5)').text()); 
- $("#billNo").val($(this).closest("tr").find('td:eq(6)').text()); 
+ $("#customerID").val($(this).closest("tr").find('td:eq(1)').text()); 
+ $("#customerName").val($(this).closest("tr").find('td:eq(2)').text()); 
+ $("#paymentType").val($(this).closest("tr").find('td:eq(3)').text()); 
+ $("#cardNo").val($(this).closest("tr").find('td:eq(4)').text()); 
+ $("#paymentAmount").val($(this).closest("tr").find('td:eq(5)').text()); 
+ $("#paymentDate").val($(this).closest("tr").find('td:eq(6)').text()); 
+ $("#billNo").val($(this).closest("tr").find('td:eq(7)').text()); 
 })
 
 
@@ -204,7 +204,8 @@ function onItemDeleteComplete(response, status)
 	     } 
  }
  
- $(document).on("click", "#btnView", function(event) 
+ 
+$(document).on("click", "#btnView", function(event) 
 { 
 const value = $("#paymentNo").val();
 		console.log(value);
@@ -212,8 +213,8 @@ const value = $("#paymentNo").val();
  { 
  url : "PaymentsAPI", 
  type : "GET", 
- data : "paymentNo=" + $(this).data("paymentno"),
- dataType : "text", 
+ data : "paymentNo=" + $("#paymentNo").data("paymentNo"),
+ dataType : "String", 
  complete : function(response, status) 
  { 
  onItemViewComplete(response.responseText, status); 
@@ -224,7 +225,7 @@ const value = $("#paymentNo").val();
 
 function onItemViewComplete(response, status) 
 { 
-		if (status == "success") 
+		if (status = "success") 
 		 { 
 		 var resultSet = JSON.parse(response); 
 		 if (resultSet.status.trim() == "success") 
@@ -241,6 +242,10 @@ function onItemViewComplete(response, status)
 		 { 
 		 $("#alertError").text("Error while view."); 
 		 $("#alertError").show(); 
-		 }
+		 }else
+		 { 
+		 $("#alertError").text("Unknown error while viewing."); 
+		 $("#alertError").show(); 
+	     } 
  }
  

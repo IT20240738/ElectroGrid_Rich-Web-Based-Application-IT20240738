@@ -137,7 +137,7 @@ public class Payment {
 			   } 
 			 
 		     // Prepare the html table to be displayed
-		     output = "<table border='1'><tr><th>Customer ID</th><th>Customer Name</th>" +
+		     output = "<table border='1'><tr><th>Payment No</th><th>Customer ID</th><th>Customer Name</th>" +
 					   "<th>Payment Type</th>" +
 					   "<th>Card No</th>" +
 					   "<th>Payment Amount</th>" +
@@ -164,7 +164,8 @@ public class Payment {
 				 String billNo = rs.getString("billNo");
 				 
 				 // Add into the html table
-				 output += "<tr><td>" + customerID + "</td>";
+				 output += "<tr><td>" + paymentNo + "</td>";
+				 output += "<td>" + customerID + "</td>";
 				 output += "<td>" + customerName + "</td>";
 				 output += "<td>" + paymentType + "</td>";
 				 output += "<td>" + cardNo + "</td>";
@@ -322,7 +323,7 @@ public class Payment {
 		
 	//get payment detail using paymentNo
 		
-		public String PaymentDetails(String paymentNo1)
+		public String PaymentDetails(String paymentNo)
 	    {
 		   String output = "";
 		   
@@ -335,7 +336,7 @@ public class Payment {
 				 } 
 			 
 		     // Prepare the html table to be displayed
-		     output = "<table border='1'><tr><th>Customer ID</th><th>Customer Name</th>" +
+		     output = "<table border='1'><tr><th>Payment No</th><th>Customer ID</th><th>Customer Name</th>" +
 					   "<th>Payment Type</th>" +
 					   "<th>Card No</th>" +
 					   "<th>Payment Amount</th>" +
@@ -344,15 +345,19 @@ public class Payment {
 					   "</tr>";
 		     
 
-		     String query = "select *  from payment where paymentNo =' " + paymentNo1 + "'" ;
+		     String query = "select *  from payment where paymentNo =' " + paymentNo + "'" ;
+//		     String query = "select * from payment where paymentNo=?";
+		     System.out.print("query");
 			 Statement stmt = con.createStatement();
 			 ResultSet rs = stmt.executeQuery(query);
-			 
-			 
+//		     PreparedStatement preparedStmt = con.prepareStatement(query); 
+			 // binding values
+//			 preparedStmt.setInt(1, Integer.parseInt(paymentNo)); 
+//			 ResultSet rs = preparedStmt.executeQuery(query);
 			 // iterate through the rows in the result set
 			 while (rs.next())
 			 {
-				 String paymentNo = Integer.toString(rs.getInt("paymentNo"));
+				 String paymentNo1 = Integer.toString(rs.getInt("paymentNo"));
 				 String customerID = rs.getString("customerID");
 				 String customerName = rs.getString("customerName");
 				 String paymentType = rs.getString("paymentType");
@@ -362,7 +367,8 @@ public class Payment {
 				 String billNo = rs.getString("billNo");
 				 
 				 // Add into the html table
-				 output += "<tr><td>" + customerID + "</td>";
+				 output += "<tr><td>" + paymentNo + "</td>";
+				 output += "<td>" + customerID + "</td>";
 				 output += "<td>" + customerName + "</td>";
 				 output += "<td>" + paymentType + "</td>";
 				 output += "<td>" + cardNo + "</td>";
@@ -376,12 +382,21 @@ public class Payment {
 //							 + "<input name='btnRemove' type='submit' value='Remove'class='btn btn-danger'>"
 //							 + "<input name='paymentNo' type='hidden' value='" + paymentNo
 //							 + "'>" + "</form></td></tr>";
+				 System.out.print("data");
+				 String data = output;
+				 
+//				 output = "{\"status\":\"success\", \"data\": \"" +data + "\"}"; 
+				 System.out.print(data);
 			 }
 			 
 			 con.close();
 			 
 			 // Complete the html table
-			 output += "</table>";
+			 
+//			 String data = output; 
+			 
+//			 output = "{\"status\":\"success\", \"data\": \"" +data + "\"}"; 
+		      //output += "</table>";
 		   }
 		   catch (Exception e)
 		   {
